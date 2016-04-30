@@ -5,7 +5,7 @@
 # Software:         PyMol
 # Software Version: 1.8.2.0
 # Description:      protein visualization
-# Website:          http://www.bcgsc.ca/platform/bioinfo/software/abyss/releases/1.9.0
+# Website:          
 # Tags:             Visualization
 # Provides:         PyMol 1.8.2.0
 # Base Image:       ubuntu 14.04
@@ -13,6 +13,7 @@
 # Pull Cmd:         
 # Run Cmd:          
 #################################################################
+
 FROM ubuntu:14.04
 
 
@@ -54,10 +55,14 @@ ENV DATASETS_DIR /home/datasets
 RUN mkdir -p ${SCRIPTS_DIR}
 RUN mkdir -p ${DATASETS_DIR}
 
+
+
 # # PyMol scripts
 
-
 ADD scripts/ ${SCRIPTS_DIR}
+ADD datasets/ ${DATASETS_DIR}
+
+
 
 
 # # # fetch and install PyMOl
@@ -65,6 +70,15 @@ ADD scripts/ ${SCRIPTS_DIR}
 RUN wget --no-verbose https://sourceforge.net/projects/pymol/files/pymol/1.8/pymol-v${PYMOL_VERSION}.tar.bz2
 RUN tar jxf pymol-v${PYMOL_VERSION}.tar.bz2
 
+RM pymol-v*
+
 WORKDIR pymol
 
 RUN python setup.py build install
+
+
+
+
+# # set working dir 
+
+WORKDIR /home
