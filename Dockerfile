@@ -14,7 +14,7 @@ RUN apt-get update
 
 RUN apt-get install -y sudo wget curl make python python-pip
 
-RUN apt-get install -y  freeglut3 freeglut3-dev libpng3 libfreetype6 pmw
+RUN apt-get install -y  freeglut3 freeglut3-dev libpng3 libfreetype6 pmw python-dev
 
 
 RUN wget --no-verbose https://sourceforge.net/projects/pymol/files/pymol/1.8/pymol-v${PYMOL_VERSION}.tar.bz2
