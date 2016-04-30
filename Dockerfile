@@ -28,7 +28,7 @@ RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
 
 # # # install some build tools
-RUN apt-get install -y sudo wget curl make python python-pip gfortran
+RUN apt-get install -y sudo wget curl make python python-pip gfortran pkg-config
 
 
 # # # Python virtualenv
