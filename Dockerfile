@@ -81,7 +81,7 @@ RUN python setup.py build install
 
 # # # # iPyMol : control PyMol via Jupyter/iPython
 
-# RUN pip install ipython freetype-py
+RUN pip install ipython freetype-py
 # RUN pip install ipymol
 
 # # # example usage of iPyMol
@@ -103,4 +103,4 @@ WORKDIR /home
 
 # # start Python in interactive mode and load PyMol without a GUI
 
-ENTRYPOINT ["python", "-ic", "execfile('pymol_scripts/pymol_init.py')"]
+# ENTRYPOINT ["python", "-ic", "execfile('pymol_scripts/pymol_init.py')"]
