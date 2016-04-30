@@ -70,7 +70,7 @@ ADD datasets/ ${DATASETS_DIR}
 RUN wget --no-verbose https://sourceforge.net/projects/pymol/files/pymol/1.8/pymol-v${PYMOL_VERSION}.tar.bz2
 RUN tar jxf pymol-v${PYMOL_VERSION}.tar.bz2
 
-RM pymol-v*
+RUN rm pymol-v*
 
 WORKDIR pymol
 
