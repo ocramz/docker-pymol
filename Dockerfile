@@ -34,8 +34,15 @@ RUN apt-get install -y sudo wget curl make python python-pip
 
 # # # install PyMol dependencies
 
-RUN apt-get install -y  freeglut3 freeglut3-dev libpng3 libfreetype6 pmw python-dev libglew libglew-dev
+RUN apt-get install -y freeglut3 freeglut3-dev libpng3 libfreetype6 pmw python-dev glew libglew1.13 libglew-dev
 
+
+
+
+
+# # # clean temp data
+
+RUN apt-get clean && apt-get purge && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 
 
