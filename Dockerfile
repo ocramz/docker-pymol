@@ -81,7 +81,7 @@ RUN python setup.py build install
 
 # # # iPyMol : control PyMol via Jupyter/iPython
 
-RUN pip install ipython 
+RUN pip install ipython freetype-py
 RUN pip install ipymol
 
 # # example usage of iPyMol
