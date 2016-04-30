@@ -79,16 +79,19 @@ RUN python setup.py build install
 
 
 
-# # # iPyMol : control PyMol via Jupyter/iPython
+# # # # iPyMol : control PyMol via Jupyter/iPython
 
-RUN pip install ipython freetype-py
-RUN pip install ipymol
+# RUN pip install ipython freetype-py
+# RUN pip install ipymol
 
-# # example usage of iPyMol
-# from ipymol import viewer as pymol
-# pymol.start()   # Start PyMOL RPC server
-# pymol.do('fetch 3odu; as cartoon; bg white')
-# pymol.show()
+# # # example usage of iPyMol
+# # from ipymol import viewer as pymol
+# # pymol.start()   # Start PyMOL RPC server
+# # pymol.do('fetch 3odu; as cartoon; bg white')
+# # pymol.show()
+
+
+
 
 
 
