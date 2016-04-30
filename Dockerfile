@@ -15,9 +15,6 @@
 #################################################################
 
 FROM ubuntu:14.04
-
-
-
 MAINTAINER Marco Zocca, zocca.marco gmail 
 
 
@@ -26,15 +23,23 @@ ENV PYMOL_VERSION 1.8.2.0
 RUN apt-get update 
 
 
+# # # bash
+RUN rm /bin/sh && ln -s /bin/bash /bin/sh
+
+
 # # # install some build tools
+RUN apt-get install -y sudo wget curl make python python-pip gfortran
 
-RUN apt-get install -y sudo wget curl make python python-pip
 
+# # # Python virtualenv
+RUN pip install virtualenv
+RUN pip install virtualenvwrapper
+# RUN source /usr/local/share/python/virtualenvwrapper.sh
+# RUN mkvirtualenv venv
 
 
 
 # # # install PyMol dependencies
-
 RUN apt-get install -y freeglut3 freeglut3-dev libpng3 libpng-dev libfreetype6 libfreetype6-dev pmw python-dev glew-utils libglew-dev libxml2-dev 
 
 
@@ -42,7 +47,6 @@ RUN apt-get install -y freeglut3 freeglut3-dev libpng3 libpng-dev libfreetype6 l
 
 
 # # # clean temp data
-
 RUN apt-get clean && apt-get purge && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 
@@ -81,7 +85,7 @@ RUN python setup.py build install
 
 # # # # iPyMol : control PyMol via Jupyter/iPython
 
-RUN pip install ipython freetype-py
+RUN pip install ipython freetype-py matplotlib
 # RUN pip install ipymol
 
 # # # example usage of iPyMol
