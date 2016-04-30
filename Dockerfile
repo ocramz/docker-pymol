@@ -34,7 +34,7 @@ RUN apt-get install -y sudo wget curl make python python-pip
 
 # # # install PyMol dependencies
 
-RUN apt-get install -y freeglut3 freeglut3-dev libpng3 libpng-dev libfreetype6 pmw python-dev glew-utils libglew-dev
+RUN apt-get install -y freeglut3 freeglut3-dev libpng3 libpng-dev libfreetype6 libfreetype6-dev pmw python-dev glew-utils libglew-dev libxml2-dev 
 
 
 
