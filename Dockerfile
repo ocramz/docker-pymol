@@ -22,4 +22,6 @@ RUN tar jxf pymol-v${PYMOL_VERSION}.tar.bz2
 
 RUN ls
 
+WORKDIR pymol
+
 RUN python setup.py build install
