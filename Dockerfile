@@ -45,8 +45,19 @@ RUN apt-get install -y freeglut3 freeglut3-dev libpng3 libpng-dev libfreetype6 l
 RUN apt-get clean && apt-get purge && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 
-RUN mkdir -p pymol_scripts
-ADD scripts/ pymol_scripts/
+
+ENV SCRIPTS_DIR /home/pymol_scripts
+ENV DATASETS_DIR /home/datasets
+
+# # useful directories
+
+RUN mkdir -p ${SCRIPTS_DIR}
+RUN mkdir -p ${DATASETS_DIR}
+
+# # PyMol scripts
+
+
+ADD scripts/ ${SCRIPTS_DIR}
 
 
 # # # fetch and install PyMOl
