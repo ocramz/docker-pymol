@@ -82,3 +82,9 @@ RUN python setup.py build install
 # # set working dir 
 
 WORKDIR /home
+
+
+
+# # start Python in interactive mode and load PyMol without a GUI
+
+ENTRYPOINT ["python", "-ic", "execfile('pymol_scripts/pymol_init.py')"]
