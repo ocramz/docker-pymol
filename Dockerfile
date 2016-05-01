@@ -86,7 +86,7 @@ RUN python setup.py build install
 # # # # iPyMol : control PyMol via Jupyter/iPython
 
 RUN pip install ipython freetype-py matplotlib
-# RUN pip install ipymol
+RUN pip install ipymol
 
 # # # example usage of iPyMol
 # # from ipymol import viewer as pymol
