@@ -20,12 +20,14 @@ MAINTAINER Marco Zocca, zocca.marco gmail
 
 # # # environment variables
 ENV PYMOL_VERSION 1.8.2.0
-ENV SCRIPTS_DIR /home/pymol_scripts
+ENV PYMS_DIR /home/scripts/PyMol
 ENV DATASETS_DIR /home/datasets
+ENV IPYNBS_DIR /home/scripts/iPython
 
 # # useful directories
 RUN mkdir -p ${SCRIPTS_DIR}
 RUN mkdir -p ${DATASETS_DIR}
+RUN mkdir -p ${IPYNBS_DIR}
 
 RUN apt-get update 
 
