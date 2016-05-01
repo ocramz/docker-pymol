@@ -48,7 +48,7 @@ RUN apt-get install -y sudo wget curl make python python-pip pkg-config
 
 
 # # # install PyMol, iPython, iPyMol +  dependencies (separated by double space)
-RUN apt-get install -y freeglut3 freeglut3-dev libpng3 libpng-dev libfreetype6 libfreetype6-dev pmw python-dev glew-utils libglew-dev libxml2-dev    gfortran libzmq1 libzmq-dev libc-dev   libtiff4-dev libjpeg8-dev zlib1g-dev liblcms2-dev libwebp-dev tcl8.5-dev tk8.5-dev python-tk
+RUN apt-get install -y freeglut3 freeglut3-dev libpng3 libpng-dev libfreetype6 libfreetype6-dev pmw python-dev glew-utils libglew-dev libxml2-dev    libblas-dev liblapack-dev gfortran libzmq1 libzmq-dev libc-dev   libtiff4-dev libjpeg8-dev zlib1g-dev liblcms2-dev libwebp-dev tcl8.5-dev tk8.5-dev python-tk
 
 
 

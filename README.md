@@ -15,3 +15,12 @@ Get Docker image from the Docker hub:
 Run image (this also starts a Python interpreter with PyMol loaded without graphical user interface) :
 
     docker run -it ocramz/docker-pymol
+
+
+
+
+## Credits
+
+Carlos Hernandez (iPyMol) : https://github.com/cxhernandez/ipymol
+
+Dan Connolly (iPython-docker): https://github.com/dckc/ipython-docker
