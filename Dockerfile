@@ -18,10 +18,16 @@ FROM ubuntu:14.04
 MAINTAINER Marco Zocca, zocca.marco gmail 
 
 
+# # # environment variables
 ENV PYMOL_VERSION 1.8.2.0
+ENV SCRIPTS_DIR /home/pymol_scripts
+ENV DATASETS_DIR /home/datasets
+
+# # useful directories
+RUN mkdir -p ${SCRIPTS_DIR}
+RUN mkdir -p ${DATASETS_DIR}
 
 RUN apt-get update 
-
 
 # # # bash
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
@@ -35,13 +41,13 @@ RUN apt-get install -y sudo wget curl make python python-pip pkg-config
 RUN apt-get install -y freeglut3 freeglut3-dev libpng3 libpng-dev libfreetype6 libfreetype6-dev pmw python-dev glew-utils libglew-dev libxml2-dev    gfortran libzmq1 libzmq-dev libc-dev   libtiff4-dev libjpeg8-dev zlib1g-dev liblcms2-dev libwebp-dev tcl8.5-dev tk8.5-dev python-tk
 
 
+
+
+
 # # # # iPython + iPyMol + dependencies
 RUN pip install pyzmq ipython jinja2 tornado numpy   ipymol matplotlib freetype-py
 
-# RUN apt-get remove -y --purge libzmq-dev python-dev libc-dev; \
-#      apt-get remove -y --purge gcc cpp binutils; \
-#      apt-get autoremove -y; \
-#      apt-get clean -y
+
 
 
 
@@ -63,13 +69,7 @@ RUN apt-get clean && apt-get purge && rm -rf /var/lib/apt/lists/* /tmp/* /var/tm
 
 
 
-ENV SCRIPTS_DIR /home/pymol_scripts
-ENV DATASETS_DIR /home/datasets
 
-# # useful directories
-
-RUN mkdir -p ${SCRIPTS_DIR}
-RUN mkdir -p ${DATASETS_DIR}
 
 
 
@@ -85,18 +85,13 @@ ADD datasets/ ${DATASETS_DIR}
 
 RUN wget --no-verbose https://sourceforge.net/projects/pymol/files/pymol/1.8/pymol-v${PYMOL_VERSION}.tar.bz2
 RUN tar jxf pymol-v${PYMOL_VERSION}.tar.bz2
-
 RUN rm pymol-v*
-
 WORKDIR pymol
-
 RUN python setup.py build install
-
 
 
 # # # set working dir 
 # WORKDIR /home
-
 
 # # # start Python in interactive mode and load PyMol without a GUI
 # ENTRYPOINT ["python", "-ic", "execfile('pymol_scripts/pymol_init.py')"]
@@ -119,7 +114,7 @@ RUN python setup.py build install
 
 
 
-# # # iPython
+# # # iPython-related
 
 # VOLUME /notebooks
 # WORKDIR /notebooks
@@ -130,8 +125,18 @@ RUN python setup.py build install
 
 
 
-# EXPOSE 8888
-# CMD ipython notebook --no-browser --ip=0.0.0.0 --port 8888
+EXPOSE 8888
+CMD ipython notebook --no-browser --ip=0.0.0.0 --port 8888
 
 # # # Usage:
 # # sudo docker run -p 8123:8888 -v `/bin/pwd`:/notebooks  -t ipython-notebook
+
+
+
+
+# # # free space on the image
+
+RUN apt-get remove -y --purge libzmq-dev python-dev libc-dev; \
+     apt-get remove -y --purge gcc cpp binutils; \
+     apt-get autoremove -y; \
+     apt-get clean -y
