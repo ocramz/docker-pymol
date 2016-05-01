@@ -55,7 +55,7 @@ RUN apt-get install -y freeglut3 freeglut3-dev libpng3 libpng-dev libfreetype6 l
 
 
 # # # # iPython + iPyMol + dependencies
-RUN pip install pyzmq ipython jupyter jinja2 tornado numpy   ipymol matplotlib freetype-py
+RUN pip install pyzmq ipython jupyter jinja2 tornado numpy  scipy  ipymol matplotlib freetype-py
 
 
 
