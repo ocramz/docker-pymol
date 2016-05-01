@@ -28,30 +28,26 @@ RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
 
 # # # install some build tools
-RUN apt-get install -y sudo wget curl make python python-pip gfortran pkg-config
+RUN apt-get install -y sudo wget curl make python python-pip pkg-config
 
 
 # # # install PyMol dependencies
 RUN apt-get install -y freeglut3 freeglut3-dev libpng3 libpng-dev libfreetype6 libfreetype6-dev pmw python-dev glew-utils libglew-dev libxml2-dev 
 
 
-# # # iPython + dependencies
-RUN (apt-get install -y libzmq1 libzmq-dev python-dev libc-dev; \
-     pip install pyzmq ipython jinja2 tornado numpy; \
-     apt-get remove -y --purge libzmq-dev python-dev libc-dev; \
-     apt-get remove -y --purge gcc cpp binutils; \
-     apt-get autoremove -y; \
-     apt-get clean -y)
+# # # # iPython + dependencies
+# RUN (apt-get install -y libzmq1 libzmq-dev python-dev libc-dev; \
+#      pip install pyzmq ipython jinja2 tornado gfortran numpy; \
+#      apt-get remove -y --purge libzmq-dev python-dev libc-dev; \
+#      apt-get remove -y --purge gcc cpp binutils; \
+#      apt-get autoremove -y; \
+#      apt-get clean -y)
 
-
-
-# # # Python virtualenv
-RUN pip install virtualenv
-RUN pip install virtualenvwrapper
-# RUN source /usr/local/share/python/virtualenvwrapper.sh
-# RUN mkvirtualenv venv
-
-
+# # # # # Python virtualenv
+# # RUN pip install virtualenv
+# # RUN pip install virtualenvwrapper
+# # # RUN source /usr/local/share/python/virtualenvwrapper.sh
+# # # RUN mkvirtualenv venv
 
 
 
@@ -99,7 +95,7 @@ RUN python setup.py build install
 # # # # iPyMol : control PyMol via Jupyter/iPython
 
 # RUN pip install freetype-py matplotlib
-RUN pip install ipymol
+# RUN pip install ipymol
 
 # # # example usage of iPyMol
 # # from ipymol import viewer as pymol
@@ -136,9 +132,9 @@ RUN pip install ipymol
 
 
 
-EXPOSE 8888
+# EXPOSE 8888
 
-CMD ipython notebook --no-browser --ip=0.0.0.0 --port 8888
+# CMD ipython notebook --no-browser --ip=0.0.0.0 --port 8888
 
 # # # Usage:
 # # sudo docker run -p 8123:8888 -v `/bin/pwd`:/notebooks  -t ipython-notebook
