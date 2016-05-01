@@ -31,6 +31,20 @@ RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 RUN apt-get install -y sudo wget curl make python python-pip gfortran pkg-config
 
 
+# # # install PyMol dependencies
+RUN apt-get install -y freeglut3 freeglut3-dev libpng3 libpng-dev libfreetype6 libfreetype6-dev pmw python-dev glew-utils libglew-dev libxml2-dev 
+
+
+# # # iPython + dependencies
+RUN (apt-get install -y libzmq1 libzmq-dev python-dev libc-dev; \
+     pip install pyzmq ipython jinja2 tornado; \
+     apt-get remove -y --purge libzmq-dev python-dev libc-dev; \
+     apt-get remove -y --purge gcc cpp binutils; \
+     apt-get autoremove -y; \
+     apt-get clean -y)
+
+
+
 # # # Python virtualenv
 RUN pip install virtualenv
 RUN pip install virtualenvwrapper
@@ -39,8 +53,7 @@ RUN pip install virtualenvwrapper
 
 
 
-# # # install PyMol dependencies
-RUN apt-get install -y freeglut3 freeglut3-dev libpng3 libpng-dev libfreetype6 libfreetype6-dev pmw python-dev glew-utils libglew-dev libxml2-dev 
+
 
 
 
@@ -85,7 +98,7 @@ RUN python setup.py build install
 
 # # # # iPyMol : control PyMol via Jupyter/iPython
 
-RUN pip install ipython freetype-py matplotlib
+# RUN pip install freetype-py matplotlib
 RUN pip install ipymol
 
 # # # example usage of iPyMol
@@ -108,3 +121,28 @@ WORKDIR /home
 # # start Python in interactive mode and load PyMol without a GUI
 
 # ENTRYPOINT ["python", "-ic", "execfile('pymol_scripts/pymol_init.py')"]
+
+
+
+
+
+# # # iPython
+
+
+
+# VOLUME /notebooks
+# WORKDIR /notebooks
+
+# # for converting notebooks...
+# RUN pip install pygments
+# RUN apt-get install -y pandoc
+
+
+
+EXPOSE 8888
+
+CMD ipython notebook --no-browser --ip=0.0.0.0 --port 8888
+
+# Usage:
+
+# sudo docker run -p 8123:8888 -v `/bin/pwd`:/notebooks  -t ipython-notebook
