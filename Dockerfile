@@ -37,7 +37,7 @@ RUN apt-get install -y freeglut3 freeglut3-dev libpng3 libpng-dev libfreetype6 l
 
 # # # iPython + dependencies
 RUN (apt-get install -y libzmq1 libzmq-dev python-dev libc-dev; \
-     pip install pyzmq ipython jinja2 tornado; \
+     pip install pyzmq ipython jinja2 tornado numpy; \
      apt-get remove -y --purge libzmq-dev python-dev libc-dev; \
      apt-get remove -y --purge gcc cpp binutils; \
      apt-get autoremove -y; \
@@ -113,13 +113,10 @@ RUN pip install ipymol
 
 
 # # set working dir 
-
-WORKDIR /home
-
+# WORKDIR /home
 
 
 # # start Python in interactive mode and load PyMol without a GUI
-
 # ENTRYPOINT ["python", "-ic", "execfile('pymol_scripts/pymol_init.py')"]
 
 
@@ -143,6 +140,5 @@ EXPOSE 8888
 
 CMD ipython notebook --no-browser --ip=0.0.0.0 --port 8888
 
-# Usage:
-
-# sudo docker run -p 8123:8888 -v `/bin/pwd`:/notebooks  -t ipython-notebook
+# # # Usage:
+# # sudo docker run -p 8123:8888 -v `/bin/pwd`:/notebooks  -t ipython-notebook
