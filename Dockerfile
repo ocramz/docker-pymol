@@ -25,9 +25,17 @@ ENV DATASETS_DIR /home/datasets
 ENV IPYNBS_DIR /home/scripts/iPython
 
 # # useful directories
-RUN mkdir -p ${SCRIPTS_DIR}
+RUN mkdir -p ${PYMS_DIR}
 RUN mkdir -p ${DATASETS_DIR}
 RUN mkdir -p ${IPYNBS_DIR}
+
+# # scripts and datasets (FIXME: better use VOLUME instead, see Dockerfile docs)
+
+ADD scripts/ ${PYMS_DIR}
+ADD datasets/ ${DATASETS_DIR}
+ADD ipymol/ ${IPYNBS_DIR}
+
+
 
 RUN apt-get update 
 
@@ -47,7 +55,7 @@ RUN apt-get install -y freeglut3 freeglut3-dev libpng3 libpng-dev libfreetype6 l
 
 
 # # # # iPython + iPyMol + dependencies
-RUN pip install pyzmq ipython jinja2 tornado numpy   ipymol matplotlib freetype-py
+RUN pip install pyzmq ipython jupyter jinja2 tornado numpy   ipymol matplotlib freetype-py
 
 
 
@@ -75,10 +83,7 @@ RUN apt-get clean && apt-get purge && rm -rf /var/lib/apt/lists/* /tmp/* /var/tm
 
 
 
-# # PyMol scripts
 
-ADD scripts/ ${SCRIPTS_DIR}
-ADD datasets/ ${DATASETS_DIR}
 
 
 
