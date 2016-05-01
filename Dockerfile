@@ -135,10 +135,10 @@ RUN python setup.py build install
 
 
 EXPOSE 8888
-CMD ipython notebook --no-browser --ip=0.0.0.0 --port 8888
+ENTRYPOINT jupyter notebook --NotebookApp.port=8888 '--NotebookApp.ip=*' # --NotebookApp.notebook_dir=/notebooks
 
 # # # Usage:
-# # sudo docker run -p 8123:8888 -v `/bin/pwd`:/notebooks  -t ipython-notebook
+# # docker run -p 8888:8888 -v `/bin/pwd`:/notebooks  -t ocramz/docker-pymol
 
 
 

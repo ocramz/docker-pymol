@@ -13,6 +13,9 @@ help:
 build:
 	docker build -t $(ACCOUNT)/docker-pymol .
 
+nb:
+	docker run -p 8888:8888 -v `/bin/pwd`:/notebooks  -t ocramz/docker-pymol
+
 login:
 	docker login -u $(ACCOUNT)
 

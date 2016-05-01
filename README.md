@@ -2,7 +2,9 @@
 
 Travis CI: [![Build Status](https://travis-ci.org/ocramz/docker-pymol.svg?branch=master)](https://travis-ci.org/ocramz/docker-pymol)
 
-Container-based installation of PyMol and related tools
+A container-based installation of PyMol.
+
+It comes bundled with iPython and iPyMol, and respective dependencies (NumPy, SciPy..)
 
 
 
