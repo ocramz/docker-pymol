@@ -35,13 +35,13 @@ RUN apt-get install -y sudo wget curl make python python-pip pkg-config
 RUN apt-get install -y freeglut3 freeglut3-dev libpng3 libpng-dev libfreetype6 libfreetype6-dev pmw python-dev glew-utils libglew-dev libxml2-dev    gfortran libzmq1 libzmq-dev libc-dev
 
 
-# # # # iPython + dependencies
-RUN pip install pyzmq ipython jinja2 tornado numpy
+# # # # iPython + iPyMol + dependencies
+RUN pip install pyzmq ipython jinja2 tornado numpy   ipymol matplotlib freetype-py
 
 # RUN apt-get remove -y --purge libzmq-dev python-dev libc-dev; \
 #      apt-get remove -y --purge gcc cpp binutils; \
 #      apt-get autoremove -y; \
-#      apt-get clean -y)
+#      apt-get clean -y
 
 
 
@@ -107,9 +107,6 @@ RUN python setup.py build install
 
 
 # # # # iPyMol : control PyMol via Jupyter/iPython
-
-# RUN pip install freetype-py matplotlib
-# RUN pip install ipymol
 
 # # # example usage of iPyMol
 # # from ipymol import viewer as pymol
