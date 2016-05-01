@@ -31,17 +31,20 @@ RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 RUN apt-get install -y sudo wget curl make python python-pip pkg-config
 
 
-# # # install PyMol dependencies
-RUN apt-get install -y freeglut3 freeglut3-dev libpng3 libpng-dev libfreetype6 libfreetype6-dev pmw python-dev glew-utils libglew-dev libxml2-dev 
+# # # install PyMol (and iPython) dependencies
+RUN apt-get install -y freeglut3 freeglut3-dev libpng3 libpng-dev libfreetype6 libfreetype6-dev pmw python-dev glew-utils libglew-dev libxml2-dev     libzmq1 libzmq-dev libc-dev
 
 
 # # # # iPython + dependencies
-# RUN (apt-get install -y libzmq1 libzmq-dev python-dev libc-dev; \
-#      pip install pyzmq ipython jinja2 tornado gfortran numpy; \
-#      apt-get remove -y --purge libzmq-dev python-dev libc-dev; \
+RUN pip install pyzmq ipython jinja2 tornado gfortran numpy
+
+# RUN apt-get remove -y --purge libzmq-dev python-dev libc-dev; \
 #      apt-get remove -y --purge gcc cpp binutils; \
 #      apt-get autoremove -y; \
 #      apt-get clean -y)
+
+
+
 
 # # # # # Python virtualenv
 # # RUN pip install virtualenv
@@ -91,6 +94,17 @@ RUN python setup.py build install
 
 
 
+# # # set working dir 
+# WORKDIR /home
+
+
+# # # start Python in interactive mode and load PyMol without a GUI
+# ENTRYPOINT ["python", "-ic", "execfile('pymol_scripts/pymol_init.py')"]
+
+
+
+
+
 
 # # # # iPyMol : control PyMol via Jupyter/iPython
 
@@ -108,20 +122,7 @@ RUN python setup.py build install
 
 
 
-# # set working dir 
-# WORKDIR /home
-
-
-# # start Python in interactive mode and load PyMol without a GUI
-# ENTRYPOINT ["python", "-ic", "execfile('pymol_scripts/pymol_init.py')"]
-
-
-
-
-
 # # # iPython
-
-
 
 # VOLUME /notebooks
 # WORKDIR /notebooks
@@ -133,7 +134,6 @@ RUN python setup.py build install
 
 
 # EXPOSE 8888
-
 # CMD ipython notebook --no-browser --ip=0.0.0.0 --port 8888
 
 # # # Usage:
